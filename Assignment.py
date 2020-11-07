@@ -13,4 +13,10 @@ data = sheet.get_all_records()
 
 row = sheet.row_values(4)
 
-print (row)
+
+
+print(row)
+
+f = open("Spectrum.txt", "w")
+f.write(str(row))
+f.close()

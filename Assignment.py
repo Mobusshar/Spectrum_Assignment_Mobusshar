@@ -1,22 +1,13 @@
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+import pandas as pd
 
-scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+googlesheetsID = '1rxZwyZp9tsDTd_Q82LdO22XdjqZr14vNvbNKAY7jQYU'
+worksheetname = 'Mar-2016'
+URL = 'https://docs.google.com/spreadsheets/d/{0}/edit#gid=407992186'.format(
+googlesheetsID,
+worksheetname
+)
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+df = pd.read_csv(URL)
+print(df)
 
-client = gspread.authorize(creds)
-
-sheet = client.open("sample__AttendanceLog__2016").sheet1
-
-data = sheet.get_all_records()
-
-row = sheet.row_values(4)
-
-
-
-print(row)
-
-f = open("Spectrum.txt", "w")
-f.write(str(row))
-f.close()
+# https://docs.google.com/spreadsheets/d/{0}/edit?usp=sharing

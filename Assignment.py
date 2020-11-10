@@ -8,10 +8,7 @@ root = Tk()
 frame = Frame(root)
 frame.pack()
 
-
-
 root.mainloop()
-
 
 conn = sqlite3.connect('spectrum.db')
 
@@ -52,7 +49,7 @@ c = sheet.col_count
 print(c)
 val4 = 47
 val3 = 8
-val1 = 1
+val1 = 46
 val2 = 1
 
 
@@ -60,9 +57,27 @@ for i in range (val2,val3):
     cells = sheet.cell(val1,val2).value
     c = str(cells)
     print (c)
-    #conn = sqlite3.connect('spectrum.db')
-    #c = conn.cursor()
-    #c.execute("""INSERT INTO march """)
-    #conn.commit()
-    #conn.close()
+    if val2 == 1:
+        val5 = c
+    elif val2 ==2:
+        val6 = c
+    elif val2 ==3:
+        val7 = c
+    elif val2 ==4:
+        val8 = c
+    elif val2 ==5:
+        val9 = c
+    elif val2 ==6:
+        val10 = c
+    elif val2 ==7:
+        val11 = c
+    else:
+        print("none")
     val2 = 1 + val2
+
+  
+#conn = sqlite3.connect('spectrum.db')
+#q = conn.cursor()
+#q.execute("INSERT INTO march (date, status, name1, name2, name3, name4, name5) VALUES (?,?,?,?,?,?,?)", (val5, val6, val7, val8, val9, val10, val11))
+#conn.commit()
+#conn.close()

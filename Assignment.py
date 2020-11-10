@@ -3,17 +3,22 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pprint
 import sqlite3
 from Tkinter import *
-from PIL import ImageTk,Image
 
 root = Tk()
-root.title('Spectrum')
-root.geometry("400x400")
+frame = Frame(root)
+frame.pack()
+
+
+
+root.mainloop()
+
 
 conn = sqlite3.connect('spectrum.db')
 
 c = conn.cursor()
 
 c.execute("""SELECT * FROM march""")
+print(c.fetchall())
 
 conn.commit()
 
@@ -55,4 +60,9 @@ for i in range (val2,val3):
     cells = sheet.cell(val1,val2).value
     c = str(cells)
     print (c)
+    #conn = sqlite3.connect('spectrum.db')
+    #c = conn.cursor()
+    #c.execute("""INSERT INTO march """)
+    #conn.commit()
+    #conn.close()
     val2 = 1 + val2

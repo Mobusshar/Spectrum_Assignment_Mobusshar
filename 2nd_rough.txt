@@ -1,0 +1,29 @@
+from __future__ import print_function
+import pickle
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+
+# SERVICE_ACCOUNT_FILE = 'credentials.json'
+scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+
+
+creds = None
+creds = InstalledAppFlow.from_client_secrets_file(
+                'creds.json', scope)
+#service_account.credentials.from_service_account_file(
+#    SERVICE_ACCOUNT_FILE, scopes=scope)
+
+SAMPLE_SPREADSHEET_ID = '1rxZwyZp9tsDTd_Q82LdO22XdjqZr14vNvbNKAY7jQYU'
+
+service = build('sheets', 'v4', credentials=creds)
+sheet = service.spreadsheets()
+result = sheet.values().get(spreadsheetId= SAMPLE_SPREADSHEET_ID,
+                            range="Mar-2016!A1:A2").execute()
+
+print(result)
+
+# f = open("Spectrum.txt", "w")
+# f.write(str(row))
+# f.close()

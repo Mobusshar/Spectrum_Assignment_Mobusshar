@@ -1,14 +1,60 @@
-import os
-from Google import Create_Service
-import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import pprint
 
-CLIENT_SECRET_FILE = 'credentials.json'
-API_SERVICE_NAME = 'sheets'
-API_VERSION = 'v4'
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
-gsheetID = '1rxZwyZp9tsDTd_Q82LdO22XdjqZr14vNvbNKAY7jQYU'
+creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 
-service = Create_Service(CLIENT_SECRET_FILE, API_SERVICE_NAME, API_VERSION, SCOPES)
+client = gspread.authorize(creds)
+
+sheet = client.open("sample__AttendanceLog__2016").sheet1
+
+# data = sheet.get_all_records()
+# print(data)
+
+pp = pprint.PrettyPrinter()
+
+row = sheet.row_values(13)
+"','".join(row)
+print ("['" + "','".join(row) + "'" +"]")
+val = 1
+col = sheet.col_values(val)
+col2 = sheet.col_values(2)
+
+print ("['" + "','".join(col) + "'" +"]")
+print ("['" + "','".join(col2) + "'" +"]")
+
+p = "['" + "','".join(row) + "'" +"]"
+print (p)
+d = str(p)
+print(type(d))
+print(d)
+
+r = sheet.get_all_values()
+#print(r)
+print(type(r))
+print (r)
+
+cells = sheet.cell(2,4).value
+c = str(cells)
+print (c)
+print (type(c))
+#cell_range = sheet.range('A1:B4')
+#print (cell_range)
+
+count = sheet.row_count
+print(count)
+
+c = sheet.col_count
+print(c)
+
+val3 = 0
+val1 = 1
+val2 = 47
+for i in range (val1,val2):
+    row = sheet.row_values(val1)
+    p = "['" + "','".join(row) + "'" +"]"
+    d = str(p)
+    print (d)
+    val1 = 1 + val1
